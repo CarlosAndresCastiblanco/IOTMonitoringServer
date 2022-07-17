@@ -27,7 +27,7 @@ import paho.mqtt.client as mqtt
 '''
 Dirección IP y puerto del servidor MQTT
 '''
-MQTT_HOST = "ec2-54-84-255-25.compute-1.amazonaws.com"  # "ip.maquina.mqtt"
+MQTT_HOST = "ec2-54-226-5-2.compute-1.amazonaws.com"  # "ip.maquina.mqtt"
 MQTT_PORT = 8082
 
 '''
@@ -70,6 +70,13 @@ que el emulador genera y la variación de la presion
 '''
 PRESSURE_VALUE = 1027
 PRESSURE_VARIATION = 1008
+
+'''
+Valor medio de la luminosidad en lx
+que el emulador genera y la variación de la luminosidad
+'''
+BRIGHTNESS_VALUE = 300
+BRIGHTNESS_VARIATION = 40
 
 def process_message(msg: str):
     '''
@@ -128,6 +135,17 @@ def measure_pressure():
     max_value = PRESSURE_VALUE + PRESSURE_VARIATION
     return random.uniform(min_value, max_value)
 
+def measure_brightness():
+    '''
+    Función de medición de luminosidad
+    En emulación, estos datos son aleatorios con distribución uniforme
+    desde el valor medio -variación hasta el valor medio +variación.
+    Si se utilizara un sensor, acá se debería leer la presion real.
+    '''
+    min_value = BRIGHTNESS_VALUE - BRIGHTNESS_VARIATION
+    max_value = BRIGHTNESS_VALUE + BRIGHTNESS_VARIATION
+    return random.uniform(min_value, max_value)
+
 def on_connect(client, userdata, flags, rc):
     '''
     Función de conexión MQTT
@@ -174,13 +192,16 @@ def measure_data():
     temperature = measure_temperature()
     moisture = measure_moisture()
     pressure = measure_pressure()
+    brightness = measure_brightness()
     print("\tTemperatura: {}°C".format(temperature))
     print("\tHumedad: {}%".format(moisture))
     print("\tPresion: {}hPa".format(pressure))
+    print("\tLuminosidad: {}lx".format(brightness))
     mqtt_publish(MQTT_PUB_TOPIC, json.dumps({
         "temperatura": temperature,
         "humedad": moisture,
-        "presion": pressure
+        "presion": pressure,
+        "luminosidad": brightness
     }))
     print("Datos enviados")
 
