@@ -40,8 +40,7 @@ MQTT_PASSWORD = "admin"  # "ContraseñaMQTT"
 '''
 Topicos de suscripción y publicación
 '''
-BASE_TOPIC = "colombia/cundinamarca/bogota/" + \
-    MQTT_USER  # "<país>/<estado>/<ciudad>/" + MQTT_USER
+BASE_TOPIC = "colombia/cundinamarca/bogota/" + MQTT_USER  # "<país>/<estado>/<ciudad>/" + MQTT_USER
 MQTT_PUB_TOPIC = BASE_TOPIC + "/out"
 MQTT_SUB_TOPIC = BASE_TOPIC + "/in"
 
@@ -151,7 +150,8 @@ def on_connect(client, userdata, flags, rc):
     Función de conexión MQTT
     '''
     print("Connected with result: " + mqtt.connack_string(rc))
-    client.subscribe(MQTT_SUB_TOPIC)
+    client.subscribe(MQTT_SUB_TOPIC, qos=1)
+    print("Subscribed to: " + MQTT_SUB_TOPIC)
 
 
 def on_message(client, userdata, msg):
@@ -175,7 +175,7 @@ def mqtt_setup():
     Función de conexión MQTT
     '''
     global client
-    client = mqtt.Client()
+    client = mqtt.Client(protocol=mqtt.MQTTv31, clean_session=True)
     client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
     client.connect(MQTT_HOST, MQTT_PORT, 60)
     client.on_connect = on_connect
