@@ -68,15 +68,15 @@ MOISTURE_VARIATION = 5.0
 Valor medio de la presion en hPa
 que el emulador genera y la variación de la presion
 '''
-PRESSURE_VALUE = 1027
-PRESSURE_VARIATION = 1008
+PRESSURE_VALUE = 1050
+PRESSURE_VARIATION = 5.0
 
 '''
 Valor medio de la luminosidad en lx
 que el emulador genera y la variación de la luminosidad
 '''
-BRIGHTNESS_VALUE = 300
-BRIGHTNESS_VARIATION = 40
+BRIGHTNESS_VALUE = 320
+BRIGHTNESS_VARIATION = 5.0
 
 def process_message(msg: str):
     '''
@@ -200,8 +200,8 @@ def measure_data():
     mqtt_publish(MQTT_PUB_TOPIC, json.dumps({
         "temperatura": temperature,
         "humedad": moisture,
-        "presion": pressure,
-        "luminosidad": brightness
+        "luminosidad": brightness,
+        "presion": pressure
     }))
     print("Datos enviados")
 
