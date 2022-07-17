@@ -8,11 +8,6 @@ import schedule
 import time
 from django.conf import settings
 
-client = mqtt.Client()
-client.username_pw_set(settings.MQTT_USER, settings.MQTT_PASSWORD)
-client.connect(settings.MQTT_HOST, settings.MQTT_PORT, 60)
-client.loop_start()
-
 
 def analyze_data():
     # Consulta todos los datos de la última hora, los agrupa por estación y variable
@@ -84,10 +79,12 @@ def setup_mqtt():
     Configura el cliente MQTT para conectarse al broker.
     '''
 
-    print("Iniciando cliente MQTT...", settings.MQTT_HOST, settings.MQTT_PORT)
+    print("Iniciando cliente MQTT ....", settings.MQTT_HOST, settings.MQTT_PORT)
     global client
     try:
-        client = mqtt.Client(settings.MQTT_USER_PUB)
+        client = mqtt.Client()
+        client.username_pw_set(settings.MQTT_USER, settings.MQTT_PASSWORD)
+        client.connect(settings.MQTT_HOST, settings.MQTT_PORT, 60)
         client.on_connect = on_connect
         client.on_disconnect = on_disconnect
 
@@ -95,9 +92,6 @@ def setup_mqtt():
             client.tls_set(ca_certs=settings.CA_CRT_PATH,
                            tls_version=ssl.PROTOCOL_TLSv1_2, cert_reqs=ssl.CERT_NONE)
 
-        client.username_pw_set(settings.MQTT_USER_PUB,
-                               settings.MQTT_PASSWORD_PUB)
-        client.connect(settings.MQTT_HOST, settings.MQTT_PORT)
 
     except Exception as e:
         print('Ocurrió un error al conectar con el bróker MQTT:', e)
