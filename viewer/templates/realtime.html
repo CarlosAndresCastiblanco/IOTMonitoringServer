@@ -381,6 +381,7 @@
             data = newData.result;
             let blockerElement = document.getElementById('blocker-' + key);
             let stats = document.getElementsByClassName('stat');
+            qtySamePeriods = 0;
             if (qtySamePeriods > 2) {
               blockerElement.style.display = 'flex';
               [].forEach.call(stats, stat => {
