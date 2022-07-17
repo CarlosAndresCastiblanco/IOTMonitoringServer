@@ -27,7 +27,7 @@ import paho.mqtt.client as mqtt
 '''
 Dirección IP y puerto del servidor MQTT
 '''
-MQTT_HOST = "ec2-54-226-5-2.compute-1.amazonaws.com"  # "ip.maquina.mqtt"
+MQTT_HOST = "ec2-54-234-100-189.compute-1.amazonaws.com"  # "ip.maquina.mqtt"
 MQTT_PORT = 8082
 
 '''
