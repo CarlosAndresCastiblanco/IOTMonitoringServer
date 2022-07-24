@@ -155,7 +155,7 @@ LOGOUT_REDIRECT_URL = '/login/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Dirección del bróker MQTT
-MQTT_HOST = "	ec2-54-83-96-112.compute-1.amazonaws.com"
+MQTT_HOST = "ec2-54-83-96-112.compute-1.amazonaws.com"
 
 # Puerto del bróker MQTT
 MQTT_PORT = 8082
