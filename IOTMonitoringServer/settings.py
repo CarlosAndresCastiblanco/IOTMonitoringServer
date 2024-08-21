@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-bu+)8ft@9+qd*#e#f_s@wkyv2tmq+#!a^3j15h3kjk^jzksu0j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "35.168.15.62"]
+ALLOWED_HOSTS = ["localhost", "ec2-44-205-16-52.compute-1.amazonaws.com"]
 
 
 # Application definition
@@ -96,7 +96,7 @@ DATABASES = {
         "NAME": "iot_data",  # Nombre de la base de datos
         "USER": "dbadmin",  # Nombre de usuario
         "PASSWORD": "uniandesIOT1234*",  # Contraseña
-        "HOST": "3.90.34.215",  # Dirección IP de la base de datos
+        "HOST": "ec2-98-80-191-161.compute-1.amazonaws.com",  # Dirección IP de la base de datos
         "PORT": "",  # Puerto de la base de datos
     }
 }
@@ -156,7 +156,7 @@ LOGOUT_REDIRECT_URL = '/login/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Dirección del bróker MQTT
-MQTT_HOST = "34.238.127.213"
+MQTT_HOST = "ec2-3-235-109-46.compute-1.amazonaws.com"
 
 # Puerto del bróker MQTT
 MQTT_PORT = 8082
